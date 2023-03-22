@@ -3,7 +3,7 @@
 The Model layer is responsible for the 'business logic' part of the software.
 
 Patients' data is held in an inflammation table (2d array) where each row contains
-inflammation data for a single patient taken over a number of days
+inflammation data for a single patient taken over a number of days 
 and each column represents a single day across all patients.
 """
 
@@ -65,11 +65,3 @@ def patient_normalise(data):
     return normalised
 
 
-def daily_stdev(data):
-    """Calculate the daily standard deviation of a 2D inflammation data array for each day.
-
-    :param data: A 2D data array with inflammation data
-    (each row has measurements for a single patient across all days)
-    :returns: An array of standard deviation values of measurements for each day.
-    """
-    return np.std(data, axis=0)
