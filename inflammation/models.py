@@ -3,7 +3,7 @@
 The Model layer is responsible for the 'business logic' part of the software.
 
 Patients' data is held in an inflammation table (2d array) where each row contains
-inflammation data for a single patient taken over a number of days 
+inflammation data for a single patient taken over a number of days
 and each column represents a single day across all patients.
 """
 
@@ -47,3 +47,19 @@ def daily_min(data):
     :returns: An array of min values of measurements for each day.
     """
     return np.min(data, axis=0)
+
+
+def patient_normalise(data):
+    """
+    Normalise patient data from a 2D inflammation data array.
+
+    NaN values are ignored, and normalised to 0.
+
+    Negative values are rounded to 0.
+    """
+    max = np.nanmax(data, axis=1)
+    with np.errstate(invalid='ignore', divide='ignore'):
+        normalised = data / max[:, np.newaxis]
+    normalised[np.isnan(normalised)] = 0
+    normalised[normalised < 0] = 0
+    return normalised
